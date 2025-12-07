@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Define Sub-Schemas strictly to prevent casting errors
+// Define Sub-Schemas strictly
 const ExperienceSchema = new mongoose.Schema({
   current: String,
   type: String,
@@ -64,13 +64,14 @@ const TalentSchema = new mongoose.Schema({
   phone: { type: String },
   email: { type: String, required: true, unique: true },
   
+  // ✅ UPDATED ADDRESS SCHEMA
   address: {
     street: String,
-    building: String,
+    building: String, // Added
     city: String,
     state: String,
-    zip: String,
-    country: String
+    zip: String,      // Added
+    country: String   // Added
   },
 
   profileImage: { type: String },
@@ -89,7 +90,6 @@ const TalentSchema = new mongoose.Schema({
   // --- 3. PROFILE ---
   about: { type: String },
   
-  // ✅ Explicitly using the Sub-Schemas here
   topSkills: [SkillSchema],
   tools: [String],
   experiences: [ExperienceSchema],
