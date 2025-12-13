@@ -3,7 +3,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 require('dotenv').config();
 
-// DEBUG LOG: Check if keys exist (Don't show full keys for security)
+// DEBUG LOG: Check if keys exist
 console.log("☁️ Cloudinary Config Check:", {
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME ? "✅ Loaded" : "❌ MISSING",
   api_key: process.env.CLOUDINARY_API_KEY ? "✅ Loaded" : "❌ MISSING",
@@ -21,8 +21,13 @@ const storage = new CloudinaryStorage({
   params: async (req, file) => {
     return {
       folder: 'gensquad_uploads',
-      resource_type: 'auto',
+      // ✅ CHANGE: Use 'auto' for everything. 
+      // This lets Cloudinary detect PDFs as viewable assets rather than restricted 'raw' files.
+      resource_type: 'auto', 
       allowed_formats: ['jpg', 'png', 'jpeg', 'pdf', 'doc', 'docx'],
+      // ✅ Force public read access
+      type: 'upload', 
+      public_id: file.fieldname + '-' + Date.now(),
     };
   },
 });
