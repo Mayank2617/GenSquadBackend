@@ -77,6 +77,14 @@ const TalentSchema = new mongoose.Schema({
   profileImage: { type: String },
   resume: { type: String },
 
+  // ✅ NEW FIELDS: PAGE VISIBILITY / LISTING
+  // These arrays store the 'slugs' to identify which page(s) this profile appears on.
+  serviceSlugs: { type: [String], default: [] },    // e.g. ['ai-agents', 'generative-ai']
+  hiringSlugs: { type: [String], default: [] },     // e.g. ['hire-ai-engineers']
+  industrySlugs: { type: [String], default: [] },   // e.g. ['fintech', 'healthcare']
+  technologySlugs: { type: [String], default: [] }, // e.g. ['core-ai-machine-learning']
+  techStackSlugs: { type: [String], default: [] },  // e.g. ['openai-api', 'python']
+
   // --- 2. SOCIAL ---
   social: {
     linkedin: String,
