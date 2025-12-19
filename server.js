@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const talentRoutes = require('./routes/talentRoutes'); 
 const connectDB = require('./config/db');
+const workflowRoutes = require('./routes/workflowRoutes');
 
 dotenv.config();
 connectDB();
@@ -27,6 +28,9 @@ app.use('/api/talent', talentRoutes);
 app.get('/', (req, res) => {
   res.send('GenSquad API is running...');
 });
+
+// ✅ Add Workflow Routes
+app.use('/api/workflows', workflowRoutes);
 
 // Error Handler
 app.use((err, req, res, next) => {
